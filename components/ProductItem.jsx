@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 const ProductItem = ({ product }) => {
-  console.log(product.image);
   return (
     <div className="card">
       <Link href={`product/${product.slug}`}>
