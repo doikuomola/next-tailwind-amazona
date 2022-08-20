@@ -103,7 +103,7 @@ const Cart = () => {
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                 </div>
               </li>
-              <li onClick={() => router.push('/shipping')}>
+              <li onClick={() => router.push('login?redirect=/shipping')}>
                 <button className="primary-button w-full">Check Out</button>
               </li>
             </ul>
