@@ -18,7 +18,7 @@ export default function login() {
   return (
     <Layout title="Login">
       <form
-        className="mx-auto max-w-screen-md"
+        className="mx-auto max-w-screen-md mt-20"
         onSubmit={handleSubmit(onSubmit)}>
         <h1 className="mb-4 text-xl">Login</h1>
         <div className="mb-4">
