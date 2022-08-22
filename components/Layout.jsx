@@ -4,20 +4,27 @@ import Link from 'next/link';
 import { Store } from '../utils/Store';
 import { Menu } from '@headlessui/react';
 import { ToastContainer } from 'react-toastify';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
+import Cookies from 'js-cookie';
 import DropdownLink from './DropdownLink';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ title, children }) => {
   const { status, data: session } = useSession();
 
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
 
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, []);
+
+  const logOutClickHandler = () => {
+    Cookies.remove('cart');
+    dispatch({ type: 'CART_RESET' });
+    signOut({ callbackUrl: '/login' });
+  };
 
   return (
     <>
@@ -74,7 +81,10 @@ const Layout = ({ title, children }) => {
                       </Menu.Item>
                     )}
                     <Menu.Item>
-                      <a className="dropdown-link" href="#" onClick={''}>
+                      <a
+                        className="dropdown-link"
+                        href="#"
+                        onClick={logOutClickHandler}>
                         Logout
                       </a>
                     </Menu.Item>
