@@ -30,7 +30,8 @@ export default function Payment()
      );
 
      router.push('/placeorder');
-   };
+  };
+  
    useEffect(() => {
      if (!shippingAddress.address) {
        return router.push('/shipping');
