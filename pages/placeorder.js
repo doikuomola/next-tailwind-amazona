@@ -14,7 +14,7 @@ export default function Order() {
   const { cart } = state;
   const { cartItems, shippingAddress, paymentMethod } = cart;
 
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //what does this mean?
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //what does this mean?  == rounds up 123.45678 to 123.46
 
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
@@ -22,7 +22,9 @@ export default function Order() {
 
   //* learn javascript reduce function inDepth
 
-  const shippingPrice = itemsPrice > 200 ? 0 : 15;
+  // If you chain map and filter together you are doing the work twice. You filter every single value and then you map the remaining values. With reduce you can filter and then map in a single pass.
+
+  const shippingPrice = itemsPrice > 10000 ? 0 : 150;
   const taxPrice = round2(itemsPrice * 0.15);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
@@ -87,7 +89,7 @@ export default function Order() {
                 <Link href="/shipping">Edit</Link>
               </div>
             </div>
-            <div className="card  p-5">
+            <div className="card p-5">
               <h2 className="mb-2 text-lg">Payment Method</h2>
               <div>{paymentMethod}</div>
               <div>
@@ -100,8 +102,8 @@ export default function Order() {
                 <thead className="border-b">
                   <tr>
                     <th className="px-5 text-left">Item</th>
-                    <th className="    p-5 text-right">Quantity</th>
-                    <th className="  p-5 text-right">Price</th>
+                    <th className="p-5 text-right">Quantity</th>
+                    <th className="p-5 text-right">Price</th>
                     <th className="p-5 text-right">Subtotal</th>
                   </tr>
                 </thead>
@@ -136,7 +138,7 @@ export default function Order() {
             </div>
           </div>
           <div>
-            <div className="card  p-5">
+            <div className="card p-5">
               <h2 className="mb-2 text-lg">Order Summary</h2>
               <ul>
                 <li>
@@ -179,3 +181,5 @@ export default function Order() {
     </Layout>
   );
 }
+
+Order.auth = true;
