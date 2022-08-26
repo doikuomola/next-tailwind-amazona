@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       </StoreProvider>
     </SessionProvider>
   );
-}
+} 
 
 function Auth({ children, adminOnly }) {
   const router = useRouter();
