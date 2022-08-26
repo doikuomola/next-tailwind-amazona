@@ -1,6 +1,6 @@
 import User from '../../../models/User';
 import db from '../../../utils/db';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const handler = async (req, res) => {
   if (req.method !== 'POST') {
