@@ -18,7 +18,7 @@ const Layout = ({ title, children }) => {
 
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
-  }, []);
+  }, [cart.cartItems]);
 
   const logOutClickHandler = () => {
     Cookies.remove('cart');

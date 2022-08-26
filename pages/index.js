@@ -8,17 +8,18 @@ import { toast } from 'react-toastify';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
-  const { cart } = state;
+  // const { cart } = state;
 
   const addToCartHandler = async (product) => {
-    const itemExists = cart.cartItems.find((x) => x.slug === product.slug);
+    const itemExists = state.cart.cartItems.find(
+      (x) => x.slug === product.slug
+    );
     const quantity = itemExists ? itemExists.quantity + 1 : 1;
 
     const { data } = await axios.get(`/api/products/${product._id}`);
 
     if (data.countsInStock < quantity) {
-     return toast.error('Sorry, Product is out of stock');
-     
+      return toast.error('Sorry, Product is out of stock');
     }
     dispatch({
       type: 'CART_ADD_ITEM',
